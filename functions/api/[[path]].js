@@ -192,14 +192,20 @@ function extractUrl(value) {
   return '';
 }
 
+// 单选字段：飞书 Base 单选（select）返回数组 ["管理员"]，非单值；也兼容字符串
+function extractSelect(value) {
+  if (Array.isArray(value)) return value.length > 0 ? String(value[0]) : '';
+  return extractText(value);
+}
+
 // ===== 记录映射（与原 BitableService.map* 完全一致）=====
 function mapInterviewQuestion(raw) {
   const { id, record } = raw;
   return {
     id,
-    function: extractText(record['职能']).trim(),
-    category: extractText(record['分类']).trim(),
-    difficulty: extractText(record['难度']).trim(),
+    function: extractSelect(record['职能']).trim(),
+    category: extractSelect(record['分类']).trim(),
+    difficulty: extractSelect(record['难度']).trim(),
     question: extractText(record['题目']).trim(),
     answer: extractText(record['参考答案']).trim(),
     tags: extractTags(record['特征标签']),
@@ -212,9 +218,9 @@ function mapRecruitment(raw) {
     id,
     company: extractText(record['公司']),
     position: extractText(record['岗位']),
-    function: extractText(record['职能']).trim(),
-    city: extractText(record['工作城市']).trim(),
-    targetGrade: extractText(record['招聘对象']).trim(),
+    function: extractSelect(record['职能']).trim(),
+    city: extractSelect(record['工作城市']).trim(),
+    targetGrade: extractSelect(record['招聘对象']).trim(),
     startDate: extractDateTime(record['投递开始日期']),
     endDate: extractDateTime(record['投递截止日期']),
     applyUrl: extractUrl(record['投递链接']),
@@ -240,8 +246,8 @@ function mapAppUser(raw) {
   return {
     id,
     name,
-    role: toRole(extractText(record['角色']).trim()),
-    status: toStatus(extractText(record['状态']).trim()),
+    role: toRole(extractSelect(record['角色']).trim()),
+    status: toStatus(extractSelect(record['状态']).trim()),
     createdAt: extractDateTime(record['创建时间']),
     baseRecordId: id,
     hasPassword: extractText(record['密码']).trim().length > 0,
@@ -257,8 +263,8 @@ function mapAppUserCredential(raw) {
     recordId: id,
     name,
     password: extractText(record['密码']).trim(),
-    role: toRole(extractText(record['角色']).trim()),
-    status: toStatus(extractText(record['状态']).trim()),
+    role: toRole(extractSelect(record['角色']).trim()),
+    status: toStatus(extractSelect(record['状态']).trim()),
     createdAt: extractDateTime(record['创建时间']),
   };
 }
