@@ -21,6 +21,10 @@ export default defineConfig({
       '@lark-apaas/client-toolkit/components/NotFoundRender': path.resolve(__dirname, 'shims/client/NotFoundRender'),
     },
   },
+  // 兼容模板中对 process.env.CLIENT_BASE_PATH 的引用（浏览器端 process 不存在）
+  define: {
+    'process.env.CLIENT_BASE_PATH': JSON.stringify('/'),
+  },
   build: {
     outDir: 'dist',
   },
