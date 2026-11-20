@@ -1,0 +1,66 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "baseUrl": "./",
+    "paths": {
+      "@client/*": [
+        "client/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@/*": [
+        "./client/src/*"
+      ],
+      "@lark-apaas/client-toolkit/utils/getAxiosForBackend": [
+        "shims/client/getAxiosForBackend"
+      ],
+      "@lark-apaas/client-toolkit/logger": [
+        "shims/client/logger"
+      ],
+      "@lark-apaas/client-toolkit/components/UniversalLink": [
+        "shims/client/UniversalLink"
+      ],
+      "@lark-apaas/client-toolkit/components/AppContainer": [
+        "shims/client/AppContainer"
+      ],
+      "@lark-apaas/client-toolkit/components/ErrorRender": [
+        "shims/client/ErrorRender"
+      ],
+      "@lark-apaas/client-toolkit/components/NotFoundRender": [
+        "shims/client/NotFoundRender"
+      ]
+    },
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "client/**/*",
+    "shared/**/*",
+    "shims/**/*",
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "index.html"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "functions"
+  ]
+}
